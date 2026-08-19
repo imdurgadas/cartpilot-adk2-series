@@ -1,0 +1,50 @@
+{
+  "eval_set_id": "cartpilot_search_basic",
+  "name": "CartPilot search agent — basic product discovery",
+  "eval_cases": [
+    {
+      "eval_id": "find_water_bottle",
+      "conversation": [
+        {
+          "invocation_id": "inv-1",
+          "user_content": {
+            "parts": [{"text": "Do you have any water bottles?"}],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [{"text": "Yes — we have an Insulated Water Bottle 1L for $24.50, currently in stock."}],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {"name": "search_products", "args": {"query": "water bottle", "category": ""}}
+            ]
+          }
+        }
+      ],
+      "session_input": {"app_name": "cartpilot", "user_id": "eval-user", "state": {}}
+    },
+    {
+      "eval_id": "no_results_handled_gracefully",
+      "conversation": [
+        {
+          "invocation_id": "inv-1",
+          "user_content": {
+            "parts": [{"text": "Do you sell snowboards?"}],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [{"text": "We don't have any snowboards right now — would you like to see our other outdoor gear?"}],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {"name": "search_products", "args": {"query": "snowboard", "category": ""}}
+            ]
+          }
+        }
+      ],
+      "session_input": {"app_name": "cartpilot", "user_id": "eval-user", "state": {}}
+    }
+  ]
+}

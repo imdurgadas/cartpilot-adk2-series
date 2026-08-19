@@ -1,0 +1,7 @@
+google-adk>=2.0.0,<3.0.0
+python-dotenv>=1.0.1
+# Pinned to avoid the March 2026 LiteLLM supply-chain advisory that
+# affected PyPI releases 1.82.7/1.82.8 — check
+# https://pypi.org/project/litellm/#history for the current safe range
+# before bumping this.
+litellm>=1.83.0

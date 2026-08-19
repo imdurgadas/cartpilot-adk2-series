@@ -1,0 +1,5 @@
+# Pin to a known-good ADK 2.x release. ADK Python 2.0 GA'd May 19, 2026 —
+# check https://pypi.org/project/google-adk/ for the latest patch before
+# bumping this in a real project.
+google-adk>=2.0.0,<3.0.0
+python-dotenv>=1.0.1
