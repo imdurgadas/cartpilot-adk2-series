@@ -41,3 +41,11 @@ def get_shipping_rate(destination_zip: str, weight_lbs: float) -> dict:
 
 if __name__ == "__main__":
     mcp.run(transport="stdio")
+
+# --- Sample MCPServer Tool Execution ---
+# get_shipping_rate(destination_zip="94105", weight_lbs=2.0) ->
+# {"status": "success", "estimated_cost": 10.25, "delivery_window_days": "3-5"}
+#
+# get_shipping_rate(destination_zip="10001", weight_lbs=0.5) ->
+# {"status": "success", "estimated_cost": 7.00, "delivery_window_days": "3-5"}
+

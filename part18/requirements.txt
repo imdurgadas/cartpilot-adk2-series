@@ -1,0 +1,6 @@
+google-adk>=2.0.0,<3.0.0
+python-dotenv>=1.0.1
+mcp>=1.2.0
+# Async Postgres driver — required by DatabaseSessionService for a
+# self-hosted Postgres backend (see docker-compose.yml).
+asyncpg>=0.29.0

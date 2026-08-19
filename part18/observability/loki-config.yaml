@@ -1,0 +1,32 @@
+# Part 18 — minimal single-node Loki config, filesystem storage.
+# Fine for a single-VM deployment; for multi-node scale-out, Loki
+# supports object storage backends (including self-hosted MinIO) —
+# out of scope for this starter config.
+auth_enabled: false
+
+server:
+  http_listen_port: 3100
+
+common:
+  path_prefix: /loki
+  storage:
+    filesystem:
+      chunks_directory: /loki/chunks
+      rules_directory: /loki/rules
+  replication_factor: 1
+  ring:
+    kvstore:
+      store: inmemory
+
+schema_config:
+  configs:
+    - from: 2024-01-01
+      store: tsdb
+      object_store: filesystem
+      schema: v13
+      index:
+        prefix: index_
+        period: 24h
+
+limits_config:
+  retention_period: 720h  # 30 days — adjust to your own storage budget

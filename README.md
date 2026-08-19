@@ -6,7 +6,7 @@ and the Gemini API.
 
 ## Contents
 
-- `part01/` … `part15/` — runnable code snapshots for each part of the series.
+- `part01/` … `part18/` — runnable code snapshots for each part of the series.
 - `shared/catalog.py` — the mock product catalog reused throughout.
 
 ## Series Index
@@ -26,6 +26,9 @@ and the Gemini API.
 13. Extending CartPilot with MCP Tools
 14. Shipping CartPilot: Deployment & Production Operations
 15. **Bonus** — Bring Your Own Model: Any LLM, Cloud or Local, with ADK 2
+16. **Bonus** — Total Cost of Ownership (TCO) & Token Budgeting for Agent Systems
+17. **Bonus** — Multi-Provider TCO Comparison: Gemini vs. OpenAI vs. Anthropic vs. Ollama
+18. **Bonus** — Self-Hosted Native Production Deployment: Docker Compose, Postgres, Caddy, Jaeger & Loki
 
 ## Running any part locally
 

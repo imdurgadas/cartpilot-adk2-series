@@ -1,0 +1,110 @@
+# Part 18 — CartPilot's full native/self-hosted stack.
+# Everything here is open-source software you run yourself: no Cloud
+# Run, no managed database, no vendor observability platform. Bring
+# your own VM (or bare metal), install Docker, and this is the whole
+# production topology.
+#
+#   caddy (reverse proxy, automatic HTTPS)
+#        |
+#   cartpilot (ADK agent — adk api_server)
+#        |
+#   postgres (persistent session storage)
+#
+#   jaeger    <- traces  (OTLP, native support, own web UI)
+#   loki      <- logs    (via promtail, reads cartpilot's stdout)
+#   promtail  -> ships container logs to loki
+#
+# Bring your own model provider: point .env at Gemini/OpenAI/Anthropic,
+# OR run a local `ollama` service alongside this stack (see Part 15)
+# for an end-to-end deployment with no proprietary API calls at all.
+
+services:
+  cartpilot:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - SESSION_DB_URL=${SESSION_DB_URL}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${OTEL_EXPORTER_OTLP_ENDPOINT}
+      - OTEL_SERVICE_NAME=${OTEL_SERVICE_NAME}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    # Structured logs (Part 11) go to stdout, which Docker's default
+    # json-file log driver captures — promtail reads them from there.
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    expose:
+      - "8000"
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      - CARTPILOT_DOMAIN=${CARTPILOT_DOMAIN}
+    depends_on:
+      - cartpilot
+
+  # --- Observability: traces ---
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    restart: unless-stopped
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    ports:
+      - "16686:16686"  # Jaeger UI — http://localhost:16686
+    expose:
+      - "4317"  # OTLP gRPC — this is what OTEL_EXPORTER_OTLP_ENDPOINT points at
+
+  # --- Observability: logs ---
+  loki:
+    image: grafana/loki:latest
+    restart: unless-stopped
+    command: -config.file=/etc/loki/loki-config.yaml
+    volumes:
+      - ./observability/loki-config.yaml:/etc/loki/loki-config.yaml:ro
+      - loki_data:/loki
+    expose:
+      - "3100"
+
+  promtail:
+    image: grafana/promtail:latest
+    restart: unless-stopped
+    command: -config.file=/etc/promtail/promtail-config.yaml
+    volumes:
+      - ./observability/promtail-config.yaml:/etc/promtail/promtail-config.yaml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - loki
+
+volumes:
+  postgres_data:
+  caddy_data:
+  caddy_config:
+  loki_data:

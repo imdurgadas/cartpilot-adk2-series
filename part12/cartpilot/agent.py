@@ -25,3 +25,10 @@ Greet the shopper on their first message, then delegate.
 )
 attach_standard_callbacks(root_agent)
 root_agent.after_model_callback = track_token_usage
+
+# --- Sample Multi-Agent Output with Eval-Tested Coordinator ---
+# User: "I'm looking for trail gear under $50"
+# Coordinator -> delegates to search_agent
+# search_agent -> search_products(query="trail", category="outdoor")
+# Response: "We have the Insulated Water Bottle 1L for $24.50 and Compact Camp Stove for $45.00, both in stock and under $50."
+

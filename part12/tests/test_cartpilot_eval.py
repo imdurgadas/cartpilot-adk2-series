@@ -7,11 +7,15 @@ tokens and takes real time — that's expected for an eval suite, and is
 itself worth tracking with Part 10's cost callback if you run it often.
 """
 
-# Pytest test framework
+# Third-party environment variable loader and Pytest test framework
+from dotenv import find_dotenv, load_dotenv
 import pytest
+
+load_dotenv(find_dotenv())
 
 # Google ADK AgentEvaluator for trajectory and response evaluation
 from google.adk.evaluation.agent_evaluator import AgentEvaluator
+
 
 
 

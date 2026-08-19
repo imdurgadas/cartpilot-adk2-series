@@ -21,3 +21,14 @@ class OrderConfirmation(BaseModel):
     shopper_message: str = Field(
         description="A short, friendly one-line confirmation message for the shopper."
     )
+
+# --- Sample Validated Schema Dump ---
+# OrderConfirmation(
+#     order_id="CP-10234",
+#     lines=[OrderLine(sku="sku-004", name="Merino Wool Hiking Socks (3-pack)", quantity=2, line_total=37.50)],
+#     subtotal=37.50,
+#     estimated_tax=3.00,
+#     total=40.50,
+#     shopper_message="Thanks for your order! Your confirmation is CP-10234."
+# ).model_dump()
+

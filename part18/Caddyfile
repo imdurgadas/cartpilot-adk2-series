@@ -1,0 +1,22 @@
+# Part 18 — automatic HTTPS via Let's Encrypt, zero manual cert
+# management, zero proprietary CA or load balancer.
+#
+# Point CARTPILOT_DOMAIN's DNS A record at this machine's public IP
+# before starting the stack — Caddy handles the ACME challenge and
+# renewal entirely on its own.
+
+{$CARTPILOT_DOMAIN} {
+    reverse_proxy cartpilot:8000
+
+    encode gzip
+
+    log {
+        output stdout
+        format json
+    }
+}
+
+# For local testing with no public domain / no DNS, run instead with:
+#   CARTPILOT_DOMAIN=:80 docker compose up
+# Caddy serves plain HTTP on port 80 and skips ACME entirely when the
+# site address has no hostname.
