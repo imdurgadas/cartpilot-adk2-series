@@ -54,7 +54,7 @@ def get_product_details(sku: str) -> dict:
 
 
 root_agent = Agent(
-    model="gemini-2.5-flash-lite",
+    model="gemini-3.5-flash",
     name="product_search_agent",
     description=(
         "Helps shoppers find products in the CartPilot store by name, "

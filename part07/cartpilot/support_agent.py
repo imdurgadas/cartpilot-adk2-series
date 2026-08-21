@@ -8,7 +8,7 @@ adk.dev docs before relying on it in production):
 
 - mode="chat"        (default for a sub-agent): full multi-turn
                        conversation with the user.
-- mode="single_turn"  (default for a workflow node): does its job in one
+- mode="task"  (default for a workflow node): does its job in one
                        shot with no back-and-forth, given structured
                        input, producing structured output. No chat.
 - mode="task"         : like single_turn, but can hold a short back-and-
@@ -66,9 +66,9 @@ class OrderStatusResult(BaseModel):
 # This is deliberately the cheapest possible shape for a bounded lookup —
 # one model call, fixed input, fixed output, done.
 order_status_agent = Agent(
-    model="gemini-2.5-flash-lite",
+    model="gemini-3.5-flash",
     name="order_status_agent",
-    mode="single_turn",
+    mode="task",
     description="Looks up and summarizes a single order's status. Non-conversational.",
     instruction="Call `get_order_status` with the given order_id and write a one-line friendly summary.",
     tools=[get_order_status],
@@ -83,7 +83,7 @@ order_status_agent = Agent(
 order_status_task = AgentTool(agent=order_status_agent)
 
 support_agent = Agent(
-    model="gemini-2.5-flash-lite",
+    model="gemini-3.5-flash",
     name="support_agent",
     description=(
         "Specialist for order status, returns, and refund policy questions. "

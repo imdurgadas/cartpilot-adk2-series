@@ -45,7 +45,7 @@ def get_cart_summary(tool_context: ToolContext) -> dict:
 # calls after this point (output_schema agents can't call further tools
 # in the same turn, by design: it's a terminal, typed step).
 checkout_agent = Agent(
-    model="gemini-2.5-flash-lite",
+    model="gemini-3.5-flash",
     name="checkout_agent",
     description="Produces a structured order confirmation from cart contents.",
     instruction="""
@@ -83,7 +83,7 @@ def checkout(tool_context: ToolContext) -> dict:
 
 
 root_agent = Agent(
-    model="gemini-2.5-flash-lite",
+    model="gemini-3.5-flash",
     name="cartpilot_agent",
     description="Helps shoppers manage their cart and check out.",
     instruction="""

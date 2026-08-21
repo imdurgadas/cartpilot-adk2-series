@@ -56,7 +56,7 @@ def apply_discount_code(tool_context: ToolContext) -> dict:
 
 # --- Step 1: pure validation. Cheap model, narrow job, no ambiguity. ---
 validation_agent = Agent(
-    model="gemini-2.5-flash-lite",
+    model="gemini-3.5-flash",
     name="cart_validation_agent",
     description="Validates cart contents against stock before checkout.",
     instruction="Call `validate_cart` and report its result exactly as returned.",
@@ -66,7 +66,7 @@ validation_agent = Agent(
 
 # --- Step 2: pricing/discount logic. Also narrow, also cheap. ---
 discount_agent = Agent(
-    model="gemini-2.5-flash-lite",
+    model="gemini-3.5-flash",
     name="discount_agent",
     description="Applies any discount code to the cart subtotal.",
     instruction="""
@@ -79,7 +79,7 @@ Call `apply_discount_code` and report its result exactly as returned.
 
 # --- Step 3: the only step that produces the shopper-facing artifact. ---
 checkout_agent = Agent(
-    model="gemini-2.5-flash-lite",
+    model="gemini-3.5-flash",
     name="checkout_agent",
     description="Produces the final structured order confirmation.",
     instruction="""
@@ -105,7 +105,7 @@ checkout_pipeline = SequentialAgent(
 )
 
 root_agent = Agent(
-    model="gemini-2.5-flash-lite",
+    model="gemini-3.5-flash",
     name="cartpilot_agent",
     description="CartPilot shopping assistant with a deterministic checkout pipeline.",
     instruction="""

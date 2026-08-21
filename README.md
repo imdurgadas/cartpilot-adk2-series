@@ -62,18 +62,20 @@ source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r part01/requirements.txt
 ```
 
-You can run `adk web` either from the root directory pointing to any part, or from within the part directory:
+You can run `adk web` either from the root directory pointing to any part, or from within the part directory. 
+
+> **Tip (Fast Streaming):** Add `--enable_features=PROGRESSIVE_SSE_STREAMING` so LLM responses stream live into the browser token-by-token.
 
 **Option A — From repository root (Recommended):**
 ```bash
-adk web part01
-# or part02, part06, etc.
+adk web --enable_features=PROGRESSIVE_SSE_STREAMING part01
+# or part02, part08, etc.
 ```
 
 **Option B — From inside a part directory:**
 ```bash
 cd part01
-adk web
+adk web --enable_features=PROGRESSIVE_SSE_STREAMING
 ```
 
 ---

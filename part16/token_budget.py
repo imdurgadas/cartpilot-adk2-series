@@ -47,7 +47,7 @@ You handle CartPilot support questions.
 - Be empathetic but concise.
 """
 
-MODEL = "gemini-2.5-flash-lite"
+MODEL = "gemini-3.5-flash"
 
 
 def count_offline(text: str) -> int:

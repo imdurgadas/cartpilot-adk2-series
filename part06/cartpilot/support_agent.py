@@ -31,7 +31,7 @@ def get_order_status(order_id: str) -> dict:
 # stronger model earns its higher cost. We still default to Flash and
 # only escalate specific hard cases to Pro — see Part 10.
 support_agent = Agent(
-    model="gemini-2.5-flash-lite",
+    model="gemini-3.5-flash",
     name="support_agent",
     description=(
         "Specialist for order status, returns, and refund policy questions. "

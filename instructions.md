@@ -10,8 +10,8 @@ Make sure your virtual environment is active and `.env` is configured with `GOOG
 
 ```bash
 source .venv/bin/activate
-# Run any part from root:
-adk web partNN
+# Run any part from root with live token streaming:
+adk web --enable_features=PROGRESSIVE_SSE_STREAMING partNN
 ```
 Then open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 

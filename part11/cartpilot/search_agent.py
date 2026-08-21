@@ -28,7 +28,7 @@ def get_product_details(sku: str) -> dict:
 # Routing/search is high-volume, low-ambiguity work — Flash is the right
 # call both for cost and for latency (shoppers browsing want fast replies).
 search_agent = Agent(
-    model="gemini-2.5-flash-lite",
+    model="gemini-3.5-flash",
     name="search_agent",
     description=(
         "Specialist for finding products in the CartPilot catalog by name, "

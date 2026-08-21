@@ -21,7 +21,7 @@ for _agent in (search_agent, cart_agent, support_agent):
     _agent.after_model_callback = track_token_usage
 
 root_agent = Agent(
-    model="gemini-2.5-flash-lite",
+    model="gemini-3.5-flash",
     name="cartpilot_coordinator",
     description="CartPilot's main coordinator agent.",
     instruction="""

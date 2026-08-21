@@ -7,12 +7,12 @@ Run it with `adk web` from the parent folder and chat with it in the browser.
 from google.adk.agents import Agent
 
 
-# gemini-2.5-flash-lite is the right default for a customer-facing conversational
+# gemini-3.5-flash is the right default for a customer-facing conversational
 # node: low per-token cost, low latency, strong instruction following.
 # We'll swap in gemini-2.5-pro later for nodes that need deeper reasoning
 # (e.g. resolving ambiguous refund policy questions) — see Part 10.
 root_agent = Agent(
-    model="gemini-2.5-flash-lite",
+    model="gemini-3.5-flash",
     name="product_search_agent",
     description=(
         "Helps shoppers find products in the CartPilot store by name, "
