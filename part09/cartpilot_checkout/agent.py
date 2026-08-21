@@ -6,7 +6,7 @@ from .tools import charge_payment
 
 
 root_agent = Agent(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     name="checkout_payment_agent",
     description="Handles payment charging during checkout, with resilient error handling.",
     instruction="""

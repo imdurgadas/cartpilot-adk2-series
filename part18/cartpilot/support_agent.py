@@ -49,7 +49,7 @@ class OrderStatusResult(BaseModel):
 
 
 order_status_agent = Agent(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     name="order_status_agent",
     mode="single_turn",
     description="Looks up and summarizes a single order's status. Non-conversational.",
@@ -93,7 +93,7 @@ def process_refund(order_id: str, amount: float, reason: str, tool_context: Tool
 refund_tool = FunctionTool(process_refund, require_confirmation=refund_requires_approval)
 
 support_agent = Agent(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     name="support_agent",
     description=(
         "Specialist for order status, returns, refunds, and policy questions. "

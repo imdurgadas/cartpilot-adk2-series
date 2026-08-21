@@ -71,17 +71,17 @@ def apply_discount_code(tool_context: ToolContext) -> dict:
             "discount_amount": discount_amount, "net_subtotal": round(subtotal - discount_amount, 2)}
 
 
-validation_agent = Agent(model="gemini-2.5-flash", name="cart_validation_agent",
+validation_agent = Agent(model="gemini-2.5-flash-lite", name="cart_validation_agent",
     description="Validates cart contents against stock before checkout.",
     instruction="Call `validate_cart` and report its result exactly as returned.",
     tools=[validate_cart], output_key="validation_result")
 
-discount_agent = Agent(model="gemini-2.5-flash", name="discount_agent",
+discount_agent = Agent(model="gemini-2.5-flash-lite", name="discount_agent",
     description="Applies any discount code to the cart subtotal.",
     instruction="Validation: {validation_result}\nCall `apply_discount_code` and report the result.",
     tools=[apply_discount_code], output_key="pricing_result")
 
-checkout_step_agent = Agent(model="gemini-2.5-flash", name="checkout_step_agent",
+checkout_step_agent = Agent(model="gemini-2.5-flash-lite", name="checkout_step_agent",
     description="Produces the final structured order confirmation.",
     instruction="""
 Pricing result: {pricing_result}
@@ -105,7 +105,7 @@ checkout_pipeline = SequentialAgent(
 checkout_tool = AgentTool(agent=checkout_pipeline)
 
 cart_agent = Agent(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     name="cart_agent",
     description=(
         "Specialist for managing the shopper's cart: adding/removing items, "

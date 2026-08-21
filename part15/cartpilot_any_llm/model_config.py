@@ -2,7 +2,7 @@
 Part 15 (bonus) — provider-agnostic model selection.
 
 ADK is model-agnostic by design. An agent's `model` field accepts either:
-  (a) a native Gemini model string ("gemini-2.5-flash"), talked to
+  (a) a native Gemini model string ("gemini-2.5-flash-lite"), talked to
       directly through the Gemini API, or
   (b) a `LiteLlm` instance, which routes through LiteLLM's unified API
       to any of 100+ providers — OpenAI, Anthropic, Azure, Bedrock,
@@ -26,7 +26,7 @@ from google.adk.models.lite_llm import LiteLlm
 
 _MODEL_IDS = {
     "google": {
-        "default": "gemini-2.5-flash",
+        "default": "gemini-2.5-flash-lite",
         "strong": "gemini-2.5-pro",
     },
     "openai": {
@@ -71,7 +71,7 @@ def get_model(tier: str = "default"):
     return LiteLlm(model=model_id)
 
 # --- Sample Provider Selection Output ---
-# CARTPILOT_MODEL_PROVIDER="google"    -> get_model("default") -> "gemini-2.5-flash"
+# CARTPILOT_MODEL_PROVIDER="google"    -> get_model("default") -> "gemini-2.5-flash-lite"
 # CARTPILOT_MODEL_PROVIDER="openai"    -> get_model("default") -> LiteLlm(model="openai/gpt-4o-mini")
 # CARTPILOT_MODEL_PROVIDER="anthropic" -> get_model("default") -> LiteLlm(model="anthropic/claude-haiku-4-5")
 # CARTPILOT_MODEL_PROVIDER="ollama"    -> get_model("default") -> LiteLlm(model="ollama_chat/llama3.2")

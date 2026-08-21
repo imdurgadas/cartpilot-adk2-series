@@ -8,7 +8,7 @@ from .support_agent import support_agent
 
 
 root_agent = Agent(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     name="cartpilot_coordinator",
     description="CartPilot's main coordinator agent.",
     instruction="""

@@ -86,7 +86,7 @@ def remove_from_cart(sku: str, tool_context: ToolContext) -> dict:
 
 
 root_agent = Agent(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     name="cartpilot_agent",
     description="Helps shoppers search products and manage their cart.",
     instruction="""

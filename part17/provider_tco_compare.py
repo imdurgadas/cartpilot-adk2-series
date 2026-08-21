@@ -27,7 +27,7 @@ from dataclasses import dataclass, field
 #   Ollama:    no per-token cost — see LOCAL_HARDWARE_MONTHLY_USD below.
 PROVIDER_PRICING = {
     "google": {
-        "default": {"input": 0.30, "output": 2.50},   # gemini-2.5-flash
+        "default": {"input": 0.30, "output": 2.50},   # gemini-2.5-flash-lite
         "strong":  {"input": 1.25, "output": 10.00},  # gemini-2.5-pro
     },
     "openai": {

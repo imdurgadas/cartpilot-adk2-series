@@ -66,7 +66,7 @@ class OrderStatusResult(BaseModel):
 # This is deliberately the cheapest possible shape for a bounded lookup —
 # one model call, fixed input, fixed output, done.
 order_status_agent = Agent(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     name="order_status_agent",
     mode="single_turn",
     description="Looks up and summarizes a single order's status. Non-conversational.",
@@ -83,7 +83,7 @@ order_status_agent = Agent(
 order_status_task = AgentTool(agent=order_status_agent)
 
 support_agent = Agent(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     name="support_agent",
     description=(
         "Specialist for order status, returns, and refund policy questions. "

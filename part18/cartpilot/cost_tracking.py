@@ -18,7 +18,7 @@ from google.adk.models.llm_response import LlmResponse
 
 # Illustrative only — check current pricing before using these for real budgets.
 PRICE_PER_MILLION_TOKENS = {
-    "gemini-2.5-flash": {"input": 0.30, "output": 2.50},
+    "gemini-2.5-flash-lite": {"input": 0.30, "output": 2.50},
     "gemini-2.5-pro": {"input": 1.25, "output": 10.00},
 }
 
@@ -33,7 +33,7 @@ def track_token_usage(callback_context: CallbackContext, llm_response: LlmRespon
 
     usage = llm_response.usage_metadata
     model = callback_context.agent_name  # tag by agent; map to model below if needed
-    prices = PRICE_PER_MILLION_TOKENS.get("gemini-2.5-flash")  # default tier for this demo
+    prices = PRICE_PER_MILLION_TOKENS.get("gemini-2.5-flash-lite")  # default tier for this demo
 
     input_tokens = usage.prompt_token_count or 0
     output_tokens = usage.candidates_token_count or 0
