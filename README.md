@@ -32,17 +32,60 @@ and the Gemini API.
 
 ## Running any part locally
 
+### 1. Environment Setup
+
+Create a `.env` file in the root directory (or inside the specific `partNN` directory):
+
 ```bash
-cd partNN
+cp part01/.env.example .env
+```
+
+Add your Gemini API key inside `.env`:
+
+```env
+# Get a key at https://aistudio.google.com/apikey
+GOOGLE_API_KEY=your-gemini-api-key-here
+GOOGLE_GENAI_USE_VERTEXAI=FALSE
+```
+
+> **Note:** Get a Gemini API key at https://aistudio.google.com/apikey — no GCP project or billing setup needed for local development.
+
+---
+
+### 2. Install & Run
+
+Activate your virtual environment and install requirements:
+
+```bash
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env               # then add your Gemini API key
+pip install -r part01/requirements.txt
+```
+
+You can run `adk web` either from the root directory pointing to any part, or from within the part directory:
+
+**Option A — From repository root (Recommended):**
+```bash
+adk web part01
+# or part02, part06, etc.
+```
+
+**Option B — From inside a part directory:**
+```bash
+cd part01
 adk web
 ```
 
-Get a Gemini API key at https://aistudio.google.com/apikey — no GCP
-project or billing setup needed for local development.
+---
+
+### 3. Testing the Agent
+
+- **Web UI:** Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser. Select the agent (e.g. `cartpilot_search`) and start chatting.
+- **Terminal CLI:** Alternatively, run an interactive CLI session without a browser:
+  ```bash
+  adk run part01/cartpilot_search
+  ```
+- **Test Playbook & Prompt Sequences:** See [instructions.md](instructions.md) for step-by-step test prompt sequences and expected tool outputs for every part (Part 1 through 18).
 
 ## A note on freshness
 
