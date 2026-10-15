@@ -3,7 +3,7 @@
 # automatically from source; this Dockerfile is here for when you want
 # an explicit, version-controlled build step (e.g. in a CI pipeline)
 # instead of the CLI's implicit build-from-source path.
-FROM python:3.13-slim
+FROM python:3.15-slim
 
 WORKDIR /app
 
