@@ -2,7 +2,7 @@
 # the image itself is cloud-specific. What changes is how we RUN it
 # (docker-compose.yml, below) and where its state lives (self-hosted
 # Postgres, not a managed database).
-FROM python:3.13-slim
+FROM python:3.15-slim
 
 WORKDIR /app
 
